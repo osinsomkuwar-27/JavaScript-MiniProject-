@@ -15,10 +15,17 @@ document.addEventListener("keypress", function(){
     }
 });
 
-function btnflash(btn){
+function gameflash(btn){
     btn.classList.add("flash");
     setTimeout(function(){
         btn.classList.remove("flash");
+    },250);    
+}
+
+function userflash(btn){
+    btn.classList.add("userflash");
+    setTimeout(function(){
+        btn.classList.remove("userflash");
     },250);    
 }
 
@@ -32,5 +39,16 @@ function levelup(){
     console.log(randomindex);
     console.log(randomcolor);
     console.log(randombtn);
-    btnflash(randombtn);
+    gameflash(randombtn);
+}
+
+function btnpress(){
+    console.log(this);
+    let btn = this;
+    userflash(btn);
+}
+
+let allBtns = document.querySelectorAll(".btn");
+for(btn of allBtns){
+    btn.addEventListener("click",btnpress);
 }
