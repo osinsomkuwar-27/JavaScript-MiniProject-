@@ -51,12 +51,16 @@ function checkans(index){
        }
     }
     else{
-        h2.innerText = `Game Over! Press any key to restart`;
+        h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> Press any key to restart`;
+        document.querySelector("body").style.backgroundColor = "red";
+        setTimeout(function(){
+            document.querySelector("body").style.backgroundColor = "white";
+        }, 150);
+        reset();
     }
 }
 
 function btnpress(){
-    console.log(this);
     let btn = this;
     userflash(btn);
     usercolor = btn.getAttribute("id");
@@ -67,4 +71,11 @@ function btnpress(){
 let allBtns = document.querySelectorAll(".btn");
 for(btn of allBtns){
     btn.addEventListener("click",btnpress);
+}
+
+function reset(){
+    started = false;
+    gameseq = [];
+    userseq = [];
+    level = 0;
 }
