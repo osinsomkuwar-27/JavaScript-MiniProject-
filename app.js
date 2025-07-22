@@ -30,22 +30,38 @@ function userflash(btn){
 }
 
 function levelup(){
+    userseq = [];
     level++;
     h2.innerText = `Level ${level}`;
 
     let randomindex = Math.floor(Math.random()*3);
     let randomcolor = btns[randomindex];
     let randombtn = document.querySelector(`.${randomcolor}`)
-    console.log(randomindex);
-    console.log(randomcolor);
-    console.log(randombtn);
+    gameseq.push(randomcolor);
     gameflash(randombtn);
+    console.log(gameseq);
+}
+
+function checkans(index){
+    console.log("current level:",level);
+
+    if(userseq[index] == gameseq[index]){
+       if(userseq.length == gameseq.length){
+        setTimeout(levelup,1000);
+       }
+    }
+    else{
+        h2.innerText = `Game Over! Press any key to restart`;
+    }
 }
 
 function btnpress(){
     console.log(this);
     let btn = this;
     userflash(btn);
+    usercolor = btn.getAttribute("id");
+    userseq.push(usercolor);
+    checkans(userseq.length-1);
 }
 
 let allBtns = document.querySelectorAll(".btn");
